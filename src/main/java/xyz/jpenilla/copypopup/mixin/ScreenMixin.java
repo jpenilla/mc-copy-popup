@@ -26,12 +26,12 @@ import xyz.jpenilla.copypopup.Popup;
 
 @Mixin(Screen.class)
 abstract class ScreenMixin {
-	@Inject(
-			method = "handleComponentClicked",
-			at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyboardHandler;setClipboard(Ljava/lang/String;)V")
-	)
-	void injectCopy(final Style style, final CallbackInfoReturnable<Boolean> cir) {
-		final String value = style.getClickEvent().getValue();
-		Popup.showPopup(value);
-	}
+    @Inject(
+        method = "handleComponentClicked",
+        at = @At(value = "INVOKE", target = "Lnet/minecraft/client/KeyboardHandler;setClipboard(Ljava/lang/String;)V")
+    )
+    void injectCopy(final Style style, final CallbackInfoReturnable<Boolean> cir) {
+        final String value = style.getClickEvent().getValue();
+        Popup.showPopup(value);
+    }
 }

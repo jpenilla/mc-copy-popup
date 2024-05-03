@@ -21,19 +21,22 @@ import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
 
 public final class Popup {
-	private Popup() {
-	}
+    private static final SystemToast.SystemToastId TOAST_ID = new SystemToast.SystemToastId();
 
-	public static void showPopup(final String value) {
-		final Minecraft client = Minecraft.getInstance();
-		if (client.player != null) {
-			client.getToasts().addToast(
-					new SystemToast(
-							SystemToast.SystemToastId.WORLD_BACKUP,
-							Component.translatable("mc-copy-popup.toast.header"),
-							Component.literal(value)
-					)
-			);
-		}
-	}
+    private Popup() {
+    }
+
+    public static void showPopup(final String value) {
+        final Minecraft client = Minecraft.getInstance();
+        if (client.player != null) {
+            client.getToasts().addToast(
+                SystemToast.multiline(
+                    client,
+                    TOAST_ID,
+                    Component.translatable("mc-copy-popup.toast.header"),
+                    Component.literal(value)
+                )
+            );
+        }
+    }
 }
