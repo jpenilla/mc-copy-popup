@@ -30,7 +30,7 @@ public final class Popup {
 			client.getToasts().addToast(
 					new SystemToast(
 							SystemToast.SystemToastId.WORLD_BACKUP,
-							Component.literal("Copied to clipboard"),
+							Component.translatable("mc-copy-popup.toast.header"),
 							Component.literal(value)
 					)
 			);
