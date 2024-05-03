@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "ScreenMixin"
+    "ScreenMixin",
+    "SystemToastMixin"
   ],
   "injectors": {
     "defaultRequire": 1

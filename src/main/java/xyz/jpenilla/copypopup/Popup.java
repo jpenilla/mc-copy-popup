@@ -19,6 +19,7 @@ package xyz.jpenilla.copypopup;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.toasts.SystemToast;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.Nullable;
 
 public final class Popup {
     private static final SystemToast.SystemToastId TOAST_ID = new SystemToast.SystemToastId();
@@ -29,14 +30,35 @@ public final class Popup {
     public static void showPopup(final String value) {
         final Minecraft client = Minecraft.getInstance();
         if (client.player != null) {
-            client.getToasts().addToast(
-                SystemToast.multiline(
-                    client,
-                    TOAST_ID,
-                    Component.translatable("mc-copy-popup.toast.header"),
-                    Component.literal(value)
-                )
+            addOrUpdate(
+                client,
+                TOAST_ID,
+                Component.translatable("mc-copy-popup.toast.header"),
+                Component.literal(value)
             );
+        }
+    }
+
+    private static void add(
+        final Minecraft client,
+        final SystemToast.SystemToastId systemToastId,
+        final Component header,
+        final @Nullable Component description
+    ) {
+        client.getToasts().addToast(SystemToast.multiline(client, systemToastId, header, description));
+    }
+
+    private static void addOrUpdate(
+        final Minecraft client,
+        final SystemToast.SystemToastId systemToastId,
+        final Component header,
+        final @Nullable Component description
+    ) {
+        final SystemToast systemToast = client.getToasts().getToast(SystemToast.class, systemToastId);
+        if (systemToast == null) {
+            add(client, systemToastId, header, description);
+        } else {
+            ((SystemToastAccess) systemToast).mc_copy_popup$resetMultiline(client, header, description);
         }
     }
 }
