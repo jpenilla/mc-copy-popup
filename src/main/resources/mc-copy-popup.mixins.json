@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8.4",
+  "package": "xyz.jpenilla.copypopup.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+  ],
+  "client": [
+    "ScreenMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
